@@ -1,0 +1,14 @@
+README.rst
+setup.py
+mcpi/__init__.py
+mcpi/block.py
+mcpi/connection.py
+mcpi/event.py
+mcpi/minecraft.py
+mcpi/util.py
+mcpi/vec3.py
+py3minepi.egg-info/PKG-INFO
+py3minepi.egg-info/SOURCES.txt
+py3minepi.egg-info/dependency_links.txt
+py3minepi.egg-info/top_level.txt
+py3minepi.egg-info/zip-safe

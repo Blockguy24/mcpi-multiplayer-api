@@ -80,11 +80,21 @@ class CmdEntity(CmdPositioner):
 
 
 class CmdPlayer(CmdPositioner):
-    """Methods for the host (Raspberry Pi) player"""
+    """Methods for the host (Raspberry Pi) player
+
+       The API's "player" package does not have a way to refer to different players.
+       In the case of RaspberryJuice in a multiplayer world, it refers to the first player.
+       Thus, if we are invoked with a non-Null player name, then we use the API's "entity"
+       package instead, providing the entity ID of the desired player.
+       For backward compatibility, we keep using the "player" package if the name is Null."""
     def __init__(self, connection, name=None):
-        CmdPositioner.__init__(self, connection, b"player")
+        if name is None:
+            CmdPositioner.__init__(self, connection, b"player")
+            self.name = []
+        else:
+            CmdPositioner.__init__(self, connection, b"entity")
+            self.name = int(connection.sendReceive(b"world.getPlayerId", name))
         self.conn = connection
-        self.name = name
 
     def getPos(self):
         return CmdPositioner.getPos(self, self.name)
